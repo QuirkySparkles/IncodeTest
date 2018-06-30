@@ -6,14 +6,14 @@ const initialState = {
 
 function searcher(array, parameter) {
     let result = [];
-    array.forEach(currentUser => {
+    array.forEach((currentUser, index) => {
+        let currentResult = {};
         for (let point in currentUser) {
-            let currentResult = {};
             for (let item in currentUser[point]) {
                 let currentItem = currentUser[point][item].toLowerCase();
                 if(item === "avatar") continue;
                 if(currentItem.indexOf(parameter.toLowerCase()) !== -1 
-                   || item.indexOf(parameter.toLowerCase()) !== -1) {
+                   || item.toLowerCase().indexOf(parameter.toLowerCase()) !== -1) {
                     let key = item.replace(/[A-Z]/g, function(letter) {
                         return " " + letter.toLowerCase();
                     });
@@ -21,8 +21,13 @@ function searcher(array, parameter) {
                     currentResult[key] = currentUser[point][item];
                 }
             }
-            if(Object.keys(currentResult).length !== 0) 
-                result.push(currentResult);
+        }
+        if(Object.keys(currentResult).length !== 0) {
+            Object.defineProperty(currentResult, "id", {
+                value: index,
+                enumerable: false
+            });
+            result.push(currentResult);
         }
     });
     return result;
