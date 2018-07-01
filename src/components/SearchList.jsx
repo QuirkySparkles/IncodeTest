@@ -3,7 +3,19 @@ import SearchItem from "./SearchItem.jsx";
 import { Item } from "semantic-ui-react";
 
 class SearchList extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            highlightedItem: -1
+        };
+        this.highlightItem = this.highlightItem.bind(this);
+    }
     
+    highlightItem(num) {
+        this.setState({
+            highlightedItem: num
+        });
+    }
     render() {
         const resultList = this.props.resultList;
         const searchTip = {
@@ -13,16 +25,15 @@ class SearchList extends React.Component {
             color: "#c1c1c1",
             width: "100%"
         };
-        const searchList = {
-            marginTop: "5px"
-        };
         return (
             <div>
                 {resultList.length === 0 ? <div style={searchTip}>No matches found</div> : 
                 <div>
                     <div style={searchTip}>Search results</div>
-                    <Item.Group divided style={searchList}>
-                        {resultList.map( (item, index) => (<SearchItem result={item} key={index} onSelectItem={this.props.onSelectItem} id={item.id}/>))}
+                    <Item.Group divided>
+                        {resultList.map( (item, index) => 
+                            (<SearchItem result={item} key={index} onSelectItem={this.props.onSelectItem} onHighlight={this.highlightItem} currentItem={index} activeItem={this.state.highlightedItem} id={item.id} />)
+                        )}
                     </Item.Group>
                 </div>
                 }

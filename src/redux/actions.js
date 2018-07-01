@@ -38,14 +38,21 @@ function postSuccess(data) {
     };
 }
 
+function postFailure() {
+    return {
+        type: "POST_FAILURE"
+    };
+}
+
 export function getPosts() {
     return function(dispatch) {
         dispatch(postRequest());
         return xhRequest("http://localhost:8080/clients/clients.json")
-            .then( 
-                response => JSON.parse(response.responseText),
-                error => console.log(error)
-            )
+            .then( response => JSON.parse(response.responseText) )
             .then( response => dispatch(postSuccess(response)) )
-    }
+            .catch( error => { 
+                dispatch(postFailure());
+                console.log(error);
+            })
+    };
 }

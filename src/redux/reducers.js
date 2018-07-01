@@ -1,5 +1,6 @@
 const initialState = {
     isFetching: false,
+    isFailed: false,
     clientList: [],
     filteredList: []
 };
@@ -39,9 +40,11 @@ export default function mainReducer( state = initialState, action) {
             return Object.assign({}, state, { filteredList: searcher(state.clientList, action.parameter)
         });
         case "REQUEST_POST":
-            return Object.assign( {}, state, { isFetching: true } );
+            return Object.assign( {}, state, { isFetching: true, isFailed: false } );
         case "POST_SUCCESS":
             return Object.assign( {}, state, { isFetching: false, clientList: action.data } );
+        case "POST_FAILURE":
+            return Object.assign( {}, state, { isFetching: false, isFailed: true });
         default:
             return state;
     }

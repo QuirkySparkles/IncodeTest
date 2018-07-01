@@ -1,0 +1,7 @@
+.active-item {
+    background: #b5f3ff;
+}
+
+.inactive {
+    cursor: pointer;
+}
