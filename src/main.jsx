@@ -6,7 +6,7 @@ import { Provider } from "react-redux";
 import { createStore, applyMiddleware } from "redux";
 import { getPosts, setSearchParameter } from "./actions.js";
 import mainReducer from "./reducers.js";
-import "../semantic/dist/semantic.min.css";
+import "semantic-ui-css/semantic.min.css";
 
 const store = createStore(
     mainReducer,

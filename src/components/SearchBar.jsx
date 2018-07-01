@@ -12,12 +12,19 @@ class SearchBar extends React.Component {
     }
     
     render() {
+        const bar = {
+            position: "relative",
+            marginTop: "15px",
+            width: "80%"
+        };
+        
         return (
             <div>
                 <Input icon="search"
                         placeholder="Search" 
                         value={this.props.searchParameter}
-                        onChange={this.handleSearchStateChange}/>
+                        onChange={this.handleSearchStateChange}
+                        style={bar}/>
             </div>
         );
     }

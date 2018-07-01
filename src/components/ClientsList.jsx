@@ -1,5 +1,6 @@
 import React from "react";
 import { Image, Item } from "semantic-ui-react";
+import "./ClientsList.css";
 
 class ClientsList extends React.Component {
     constructor(props) {
@@ -16,7 +17,7 @@ class ClientsList extends React.Component {
         return (
             <Item.Group divided>
             {clientList.map((item, index) => (
-                    <Item key={index} onClick={() => this.onClickItem(index)} >
+                    <Item key={index} onClick={() => this.onClickItem(index)} className="active-item">
                         <Item.Image size="tiny" src={item.general.avatar} />
                         <Item.Content>
                             <Item.Header as="p">{item.general.firstName} {item.general.lastName}
@@ -25,10 +26,10 @@ class ClientsList extends React.Component {
                                 {item.job.title}
                             </Item.Meta>
                         </Item.Content>
-                    </Item> //define function onClick here
+                    </Item>
             ))}
             </Item.Group>
-            );
+        );
     }
 }
 

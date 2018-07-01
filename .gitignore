@@ -1,5 +1,3 @@
 # Dev directories
 node_modules
 dist
-semantic/dist
-semantic/tasks
